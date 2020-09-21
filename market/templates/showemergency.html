@@ -1,0 +1,40 @@
+{% extends 'marketbase.html' %}
+{% block content %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                    <div class="container">
+                        {%for product in products.all%}
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        {{product.category}}
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{product.product_name}}</h4>
+                                        <h6 class="card-text">Amount: {{product.amount}}</h6>
+                                        <h6>Price per unit: {{product.price_per_unit}}</h6>
+                                        <p>{{product.product_description}}</p>
+
+                                        <a href="{% url 'market:productDetails' product.vendor_id product.product_name %}"
+                                        class="btn btn-secondary">See Details</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
